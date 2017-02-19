@@ -1,4 +1,4 @@
-package com.mkyong.common;
+package com.motoloto.common;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
