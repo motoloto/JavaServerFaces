@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	ng-app="AngularChartExample">
+
+<head>
+	<title>JSF 2.0 Hello World</title>
+</head>
+<body bgcolor="white">
+	<h3>JSF 2.0 JSF with AngualarJS chart.xhtml</h3>
+	<h4>Q1 #{performance.season1}</h4>
+	<h4>Q2 #{performance.season2}</h4>
+	<h4>Q3 #{performance.season3}</h4>
+	<h4>Q4 #{performance.season4}</h4>
+	
+	<div ng-view="viewer"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="js/chart.js"></script>
+    <script>
+        function MainCtrl($scope, $http){
+            var data = {"xData": ["Q1", "Q2", "Q3", "Q4"],"yData":[{
+                "name": "Tokyo",
+                "data": [#{performance.season1}, #{performance.season2}, #{performance.season3}, #{performance.season4}]
+            }]}
+            
+            $scope.lineChartYData=data.yData
+            $scope.lineChartXData=data.xData
+        }
+    </script>
+    <script>
+    angular.module('AngularChartExample',['AngularChart'], function( $routeProvider, $locationProvider ){
+        $routeProvider.when('/',{
+            template: '<chart title="Line chart example" xData="lineChartXData" yData="lineChartYData" xName="Month" yName="Hit" subtitle="This is an example"></chart>',
+            controller: MainCtrl
+            })
+    })
+    </script>
+</body>
+</html>
